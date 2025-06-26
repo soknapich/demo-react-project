@@ -18,7 +18,7 @@ pipeline {
                         docker stop node-nginx || true
                         docker rm node-nginx || true
                         docker run -d -p 8081:80 \
-                        -v $WORKSPACE/build:/usr/share/nginx/html:ro \
+                        -v $WORKSPACE/build:/usr/share/nginx/html \
                         --name node-nginx \
                         nginx
 
