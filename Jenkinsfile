@@ -13,8 +13,9 @@ pipeline {
 
                     sh 'pwd' // check workspace path
                     sh 'ls -l build' // make sure it exists
-
+                    sh 'chmod -R 755 $WORKSPACE/build'
                     sh '''
+                    
                         docker run -d -p 8081:80 \
                         -v $WORKSPACE/build:/usr/share/nginx/html \
                         --name node-nginx \
