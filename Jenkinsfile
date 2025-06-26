@@ -6,7 +6,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:21-alpine'
-                    reuseNode true
+                    
                 }
             }
             steps {
@@ -14,7 +14,7 @@ pipeline {
                     ls -la
                     node --version
                     npm --version
-                    npm ci
+                    npm install
                     npm run build
 
                 '''
