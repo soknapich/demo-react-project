@@ -1,21 +1,21 @@
 pipeline {
     agent any
-    // agent {
-    //     docker {
-    //         image 'node:21-alpine'
-    //         //args '-u root' // run as root to install packages
-    //     }
-    // }
+    agent {
+        docker {
+            image 'node:21-alpine'
+            //args '-u root' // run as root to install packages
+        }
+    }
 
     stages {
-        // stage('Build') {
-        //      steps {
-        //         sh '''
-        //             npm install
-        //             npm run build
-        //         '''
-        //     }
-        // }
+        stage('Build') {
+             steps {
+                sh '''
+                    npm install
+                    npm run build
+                '''
+            }
+        }
 
         // stage('Test') {
         //     steps {
