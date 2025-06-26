@@ -22,7 +22,7 @@ pipeline {
                         --name node-nginx \
                         nginx
 
-                        docker cp /var/jenkins_home/workspace/$WORKSPACE/build/. node-nginx:/usr/share/nginx/html
+                        docker cp $WORKSPACE/build/. node-nginx:/usr/share/nginx/html
                     '''
 
                 // sh '''
