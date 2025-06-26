@@ -8,7 +8,21 @@ pipeline {
     // }
 
     stages {
-        stage('Install Image') {
+        stage('Build') {
+             steps {
+                sh '''
+                    npm run build
+                '''
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Install nginx Image') {
             steps {
 
                     sh 'pwd' // check workspace path
@@ -30,19 +44,6 @@ pipeline {
                 // '''
             }
         }
-        // stage('Build') {
-        //      steps {
-        //         sh '''
-        //             npm run build
-        //         '''
-        //     }
-        // }
-
-        // stage('Test') {
-        //     steps {
-        //         sh 'npm test'
-        //     }
-        // }
 
 
         // stage('Install and Run Nginx') {
