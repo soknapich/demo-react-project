@@ -1,55 +1,51 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:21-alpine'
-            args '-u root' // run as root to install packages
-        }
-    }
+    // agent {
+    //     docker {
+    //         image 'node:21-alpine'
+    //         args '-u root' // run as root to install packages
+    //     }
+    // }
 
     stages {
-        stage('Install Dependencies') {
+        stage('Install Image') {
             steps {
                 sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm install
-
+                    docker run -d -p 8081:80 nginx
                 '''
             }
         }
-        stage('Build') {
-             steps {
-                sh '''
-                    npm run build
-                '''
-            }
-        }
+        // stage('Build') {
+        //      steps {
+        //         sh '''
+        //             npm run build
+        //         '''
+        //     }
+        // }
 
-        stage('Test') {
-            steps {
-                sh 'npm test'
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         sh 'npm test'
+        //     }
+        // }
 
 
-        stage('Install and Run Nginx') {
-            steps {
-                script {
-                    // Assuming Jenkins agent is Linux with apt-get
-                    sh '''
-                        apt-get update
-                        apt-get install -y nginx
-                    '''
-                    // Copy built files to Nginx root (adjust paths)
-                    sh '''
-                        rm -rf /var/www/html/*
-                        cp -r build/* /var/www/html/
-                        systemctl restart nginx
-                    '''
-                }
-            }
-        }
+        // stage('Install and Run Nginx') {
+        //     steps {
+        //         script {
+        //             // Assuming Jenkins agent is Linux with apt-get
+        //             sh '''
+        //                 apt-get update
+        //                 apt-get install -y nginx
+        //             '''
+        //             // Copy built files to Nginx root (adjust paths)
+        //             sh '''
+        //                 rm -rf /var/www/html/*
+        //                 cp -r build/* /var/www/html/
+        //                 systemctl restart nginx
+        //             '''
+        //         }
+        //     }
+        // }
 
 
     }
