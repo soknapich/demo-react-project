@@ -17,7 +17,7 @@ pipeline {
                     sh '''
                     
                         docker run -d -p 8081:80 \
-                        -v $WORKSPACE/build:/usr/share/nginx/html \
+                        -v $WORKSPACE/build:/usr/share/nginx/html:ro \
                         --name node-nginx \
                         nginx
                     '''
