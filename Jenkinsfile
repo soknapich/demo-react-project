@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:21-alpine'
+            args '-u root' // run as root to install packages
         }
     }
 
