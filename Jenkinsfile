@@ -15,7 +15,8 @@ pipeline {
                     sh 'ls -l build' // make sure it exists
                     sh 'chmod -R 755 $WORKSPACE/build'
                     sh '''
-                    
+                        docker stop my-nginx || true
+                        docker rm my-nginx || true
                         docker run -d -p 8081:80 \
                         -v $WORKSPACE/build:/usr/share/nginx/html:ro \
                         --name node-nginx \
