@@ -11,6 +11,7 @@ pipeline {
         stage('Install Image') {
             steps {
                 sh '''
+                    rm -rf /var/lib/nginx/html/* && cp -r build/* /var/lib/nginx/html/
                     docker run -d -p 8081:80 nginx
                 '''
             }
