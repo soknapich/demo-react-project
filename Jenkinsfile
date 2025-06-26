@@ -10,9 +10,20 @@ pipeline {
     stages {
         stage('Install Image') {
             steps {
-                sh '''
-                    docker run -d -p 8081:80 -v $(pwd)/build:/usr/share/nginx/html nginx
-                '''
+
+                    sh 'pwd' // check workspace path
+                    sh 'ls -l build' // make sure it exists
+
+                    sh '''
+                        docker run -d -p 8081:80 \
+                        -v $(pwd)/build:/usr/share/nginx/html \
+                        --name node-nginx \
+                        nginx
+                    '''
+
+                // sh '''
+                //     docker run -d -p 8081:80 -v $(pwd)/build:/usr/share/nginx/html nginx
+                // '''
             }
         }
         // stage('Build') {
