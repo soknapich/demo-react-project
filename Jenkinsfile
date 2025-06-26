@@ -92,17 +92,34 @@ pipeline {
             }
         }
 
+        stage('Remove Nginx') {
+            agent any  // run this on host where Docker CLI works
+                steps {
+                    sh '''
+                        docker stop node-nginx || true
+                        docker rm node-nginx || true
+                    '''
+                }
+        }
+
         stage('Run NGINX') {
             agent any  // run this on host where Docker CLI works
             steps {
                 sh '''
-                    docker stop node-nginx || true
-                    docker rm node-nginx || true
                     docker run -d --name node-nginx -p 8081:80 nginx
+                '''
+            }
+        }
+
+        stage('Copy build files') {
+            agent any  // run this on host where Docker CLI works
+            steps {
+                sh '''
                     docker cp ${BUILD_DIR}/. node-nginx:/usr/share/nginx/html
                 '''
             }
         }
+
     }
 }
 
