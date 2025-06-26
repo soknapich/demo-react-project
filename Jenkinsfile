@@ -11,7 +11,7 @@ pipeline {
         stage('Install Image') {
             steps {
                 sh '''
-                    docker run -d -p 8081:80 -v /build:/usr/share/nginx/html nginx
+                    docker run -d -p 8081:80 -v $(pwd)/build:/usr/share/nginx/html nginx
                 '''
             }
         }
